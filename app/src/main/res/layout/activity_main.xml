@@ -130,7 +130,7 @@
             app:srcCompat="@drawable/user_solid" />
 
         <Button
-            android:id="@+id/boton_login"
+            android:id="@+id/siguiente"
             android:layout_width="202sp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
@@ -158,7 +158,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/boton_login"
+            app:layout_constraintTop_toBottomOf="@+id/siguiente"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -172,7 +172,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.768"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/boton_login"
+            app:layout_constraintTop_toBottomOf="@+id/siguiente"
             app:layout_constraintVertical_bias="0.0" />
 
 
