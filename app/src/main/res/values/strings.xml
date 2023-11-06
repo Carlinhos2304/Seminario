@@ -1,0 +1,24 @@
+<resources>
+    <!-- pantalla de registro -->
+    <string name="app_name">RegisterToken</string>
+    <string name="register_rut"></string>
+    <string name="register_email"></string>
+    <string name="register_pin"></string>
+    <string name="register_repitapin"></string>
+    <string name="boton_registrarse"></string>
+    <string name="Yaregistrado"></string>
+    <string name="registrate">Registrate</string>
+    <string name="ingrese_sus_datos">Ingrese sus datos</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="ya_estas_registrado">¿Ya estas registrado?</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="rut">Rut</string>
+    <string name="correo_electronico">Correo electronico</string>
+
+    <!-- pantalla de login -->
+    <string name="Bienvenido"></string>
+    <string name="login_rut"></string>
+    <string name="login_pin"></string>
+    <string name="boton_login">Ingresar</string>
+    <string name="Noregistrado"></string>
+</resources>
