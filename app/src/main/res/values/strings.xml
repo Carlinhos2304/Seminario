@@ -14,6 +14,8 @@
     <string name="iniciar_sesion">Iniciar sesion</string>
     <string name="rut">Rut</string>
     <string name="correo_electronico">Correo electronico</string>
+    <string-array name="tipo_usuario">
+    </string-array>
 
     <!-- pantalla de login -->
     <string name="Bienvenido"></string>
