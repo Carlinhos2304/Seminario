@@ -9,7 +9,7 @@
     <string name="Yaregistrado"></string>
     <string name="registrate">Registrate</string>
     <string name="ingrese_sus_datos">Ingrese sus datos</string>
-    <string name="siguiente">Siguiente</string>
+    <string name="boton_siguiente">Siguiente</string>
     <string name="ya_estas_registrado">¿Ya estas registrado?</string>
     <string name="iniciar_sesion">Iniciar sesion</string>
     <string name="rut">Rut</string>
@@ -22,5 +22,19 @@
     <string name="login_rut"></string>
     <string name="login_pin"></string>
     <string name="boton_login">Ingresar</string>
-    <string name="Noregistrado"></string>
+    <string name="Noregistrado">Registrarse</string>
+
+    <!-- pantalla de registro profesor -->
+    <string-array name="spinner_semestre"></string-array>
+    <string name="radioGroups"></string>
+    <string name="boton_siguiente_pro">Siguiente</string>
+
+    <!-- pantalla de registro profesor -->
+    <string-array name="spinner_carrera"></string-array>
+    <string-array name="spinner_semestre_es"></string-array>
+    <string-array name="spinner_sede"></string-array>
+    <string-array name="spinner_jornada"></string-array>
+    <string name="boton_registrarse_est"></string>
+
+
 </resources>

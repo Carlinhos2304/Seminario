@@ -15,13 +15,38 @@
         android:alwaysDrawnWithCache="false"
         android:animateLayoutChanges="false"
         android:background="@drawable/cuadro_redondo"
-        android:elevation="5dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.38">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="196dp"
+            android:layout_height="53dp"
+            android:background="@drawable/cuadro_redondo"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.478"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.815">
+
+            <Spinner
+                android:id="@+id/tipo_usuario"
+                android:layout_width="184dp"
+                android:layout_height="51dp"
+                android:backgroundTint="#000000"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/register_repitapin"
@@ -43,21 +68,28 @@
             app:layout_constraintVertical_bias="0.468"
             tools:ignore="TextContrastCheck" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="22sp"
-            android:layout_height="25sp"
-            android:contentDescription="TODO"
+        <EditText
+            android:id="@+id/register_rut"
+            android:layout_width="240dp"
+            android:layout_height="48dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/lilita_one"
+            android:hint="Rut"
+            android:inputType="number"
+            android:textColor="#A6A6A6"
+            android:textColorHint="#A6A6A6"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/login_rut"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.632"
-            app:srcCompat="@drawable/lock_solid" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.072"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
-            android:id="@+id/login_pin"
+            android:id="@+id/register_pin"
             android:layout_width="240dp"
             android:layout_height="48dp"
             android:autofillHints=""
@@ -74,19 +106,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintVertical_bias="0.33"
-            tools:ignore="TextContrastCheck,TextContrastCheck" />
+            tools:ignore="TextContrastCheck" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="22sp"
+            android:layout_height="25sp"
+            android:layout_marginStart="28dp"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.628"
+            app:srcCompat="@drawable/lock_solid" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="22sp"
             android:layout_height="25sp"
+            android:layout_marginStart="28dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/login_rut"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.54"
+            app:layout_constraintVertical_bias="0.541"
             app:srcCompat="@drawable/lock_solid" />
 
         <EditText
@@ -113,10 +156,9 @@
             android:id="@+id/imageView3"
             android:layout_width="22sp"
             android:layout_height="25sp"
+            android:layout_marginStart="28dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/login_rut"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.451"
@@ -177,97 +219,60 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:layout_constraintVertical_bias="0.623" />
 
-        <EditText
-            android:id="@+id/login_rut"
-            android:layout_width="240dp"
-            android:layout_height="48dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:fontFamily="@font/lilita_one"
-            android:hint="@string/rut"
-            android:inputType="textPersonName"
-            android:textColor="#A6A6A6"
-            android:textColorHighlight="#A6A6A6"
-            android:textColorHint="#A6A6A6"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.542"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.055"
-            tools:ignore="TextContrastCheck,TextContrastCheck" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="22sp"
             android:layout_height="25sp"
+            android:layout_marginStart="28dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/login_rut"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.362"
+            app:layout_constraintVertical_bias="0.371"
             app:srcCompat="@drawable/user_solid" />
-
-        <Button
-            android:id="@+id/siguiente"
-            android:layout_width="202sp"
-            android:layout_height="48dp"
-            android:backgroundTint="#DCDCDC"
-            android:elevation="20dp"
-            android:fontFamily="sans-serif-condensed-light"
-            android:text="@string/siguiente"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_repitapin"
-            app:layout_constraintVertical_bias="0.634"
-            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/ya_estas_registrado"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.295"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/siguiente"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.255"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/boton_registrarse"
+            android:layout_width="202sp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="36dp"
+            android:backgroundTint="#DCDCDC"
+            android:elevation="10dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="@string/boton_siguiente"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.477"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/Noregistrado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="#DCDCDC"
-            android:text="@string/iniciar_sesion"
+            android:id="@+id/Yaregistrado"
+            android:layout_width="90dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="48dp"
+            android:elevation="10dp"
+            android:text="Iniciar sesion"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.768"
+            app:layout_constraintHorizontal_bias="0.79"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/siguiente"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Spinner
-            android:id="@+id/tipo_usuario"
-            android:layout_width="202dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="18dp"
-            android:backgroundTint="#000000"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toTopOf="@+id/siguiente"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@+id/boton_registrarse"
+            app:layout_constraintVertical_bias="0.055" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

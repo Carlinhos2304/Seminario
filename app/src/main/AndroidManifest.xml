@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainRegister">
+        </activity>
+        <activity android:name=".MainRegisterProfesor">
+        </activity>
+        <activity android:name=".MainRegisterEstudiante">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

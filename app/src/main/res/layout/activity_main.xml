@@ -14,7 +14,7 @@
         android:alwaysDrawnWithCache="false"
         android:animateLayoutChanges="false"
         android:background="@drawable/cuadro_redondo"
-        android:elevation="5dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -130,7 +130,7 @@
             app:srcCompat="@drawable/user_solid" />
 
         <Button
-            android:id="@+id/siguiente"
+            android:id="@+id/boton_login"
             android:layout_width="202sp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
@@ -146,7 +146,7 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_pin"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.166" />
 
         <TextView
             android:id="@+id/textView3"
@@ -158,7 +158,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/siguiente"
+            app:layout_constraintTop_toBottomOf="@+id/boton_login"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -166,13 +166,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Registrarse"
+            android:elevation="10dp"
+            android:text="@string/Noregistrado"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.768"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/siguiente"
+            app:layout_constraintTop_toBottomOf="@+id/boton_login"
             app:layout_constraintVertical_bias="0.0" />
 
 
