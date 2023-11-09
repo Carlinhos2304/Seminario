@@ -61,7 +61,7 @@ public class UserEstudiante {
         return spinner_carrera;
     }
 
-    public void setSpinner_carrera(String spinner_jornada) {
+    public void setSpinner_carrera(String spinner_carrera) {
         this.spinner_carrera = spinner_carrera;
     }
     public String getSpinner_semestre_es() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListPopupWindow;
 import android.widget.RadioButton;
@@ -14,11 +15,22 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class MainRegisterProfesor extends AppCompatActivity {
 
     private Spinner spinner_semestre;
     private RadioGroup radioGroups;
     private TextView Yaregistrado;
+    private Button boton_siguiente_pro;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +39,8 @@ public class MainRegisterProfesor extends AppCompatActivity {
         spinner_semestre=findViewById(R.id.spinner_semestre);
         radioGroups = findViewById(R.id.radioGroups);
         Yaregistrado =findViewById(R.id.Yaregistrado);
+        boton_siguiente_pro = findViewById(R.id.boton_siguiente_pro);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Yaregistrado.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +86,26 @@ public class MainRegisterProfesor extends AppCompatActivity {
                     CheckBox CheckBox5 = new CheckBox(MainRegisterProfesor.this);
                     CheckBox5.setText("Fundamentos de Hardware y Software");
                     radioGroups.addView(CheckBox5);
+                    boton_siguiente_pro.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            String semestre = spinner_semestre.getSelectedItem().toString();
+                            ArrayList<String> asignaturas = CheckBox1();
+                            // Recupera los datos adicionales del Intent
+                            String rut = getIntent().getStringExtra("rut");
+                            String email = getIntent().getStringExtra("email");
+                            String pin = getIntent().getStringExtra("pin");
+                            String tipoUsuario = getIntent().getStringExtra("tipoUsuario");
+
+                            if (rut!=null && email!=null && pin!=null && tipoUsuario!=null){
+                                UserProfesor newUser = new UserProfesor(rut, email, pin, tipoUsuario, semestre, asignaturas);
+                                String UserPro = mDatabase.child("Profesores").push().getKey();
+                                mDatabase.child("Profesores").child(UserPro).setValue(newUser);
+                            }else{
+
+                            }
+                        }
+                    });
 
                 } else if (selectedOption.equals("2° Semestre")) {
                     // Agrega las opciones específicas para Opción 2
@@ -154,11 +188,17 @@ public class MainRegisterProfesor extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // No se necesita una acción especial aquí
             }
 
+
+
         });
+
+
     }
+
 }

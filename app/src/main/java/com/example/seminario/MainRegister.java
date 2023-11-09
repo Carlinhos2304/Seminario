@@ -77,6 +77,10 @@ public class MainRegister extends AppCompatActivity {
                 } else if (selectedOption.equals("Docente")) {
                     // Navega al otro diseño al hacer clic en el botón
                     Intent intent = new Intent(MainRegister.this, MainRegisterProfesor.class);
+                    intent.putExtra("rut", rut);
+                    intent.putExtra("email", email);
+                    intent.putExtra("pin", pin);
+                    intent.putExtra("tipoUsuario", selectedOption);
                     startActivity(intent);
                 }
 
@@ -99,22 +103,6 @@ public class MainRegister extends AppCompatActivity {
 
 
     }
-    // Método para enviar datos a Firebase
-    private void sendDataToFirebaseProfesor() {
-        String rut = register_rut.getText().toString();
-        String email = register_email.getText().toString();
-        String pin = register_pin.getText().toString();
-        String repitapin = register_repitapin.getText().toString();
-        String tipoUsuario = tipo_usuario.getSelectedItem().toString();
-
-
-        // A continuación, envía estos valores a Firebase, ya sea a Firebase Realtime Database o Firebase Cloud Firestore, según tu elección.
-        // Por ejemplo, si usas Firebase Realtime Database:
-        UserProfesor newUser = new UserProfesor(rut, email, pin, tipoUsuario);
-        String userId = mDatabase.child("Profesores").push().getKey();
-        mDatabase.child("Profesores").child(userId).setValue(newUser);
-    }
-
 }
 
 
