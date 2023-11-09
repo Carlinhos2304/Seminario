@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "703049760267",
+    "project_id": "apptokens-3ffeb",
+    "storage_bucket": "apptokens-3ffeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703049760267:android:d766db6858876f8a28510e",
+        "android_client_info": {
+          "package_name": "com.example.seminario"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBACaYNl8LgaIbzbaSrhS44-Av90mubdjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

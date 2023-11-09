@@ -38,6 +38,8 @@ public class MainRegisterProfesor extends AppCompatActivity {
         });
 
 
+
+
         String[] datos = new String[] {"1° Semestre", "2° Semestre", "3° Semestre", "4° Semestre"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, datos);
@@ -156,6 +158,7 @@ public class MainRegisterProfesor extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 // No se necesita una acción especial aquí
             }
+
         });
     }
 }

@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.38">
 
         <TextView
-            android:id="@+id/yaregistrado"
+            android:id="@+id/Yaregistrado"
             android:layout_width="90dp"
             android:layout_height="19dp"
             android:layout_marginTop="48dp"
