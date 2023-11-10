@@ -34,7 +34,7 @@ public class MainRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        tipo_usuario = (Spinner) findViewById(R.id.tipo_usuario);
+        tipo_usuario = findViewById(R.id.tipo_usuario);
         boton_siguiente = findViewById(R.id.boton_registrarse);
         Yaregistrado = findViewById(R.id.Yaregistrado);
         register_rut = findViewById(R.id.register_rut);
