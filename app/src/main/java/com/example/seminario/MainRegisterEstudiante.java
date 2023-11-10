@@ -24,6 +24,7 @@ public class MainRegisterEstudiante extends AppCompatActivity {
     private Button boton_registrarse_est;
     private DatabaseReference mDatabase;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +85,12 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                 String email = getIntent().getStringExtra("email");
                 String pin = getIntent().getStringExtra("pin");
                 String tipoUsuario = getIntent().getStringExtra("tipoUsuario");
+                Intent intent = new Intent(MainRegisterEstudiante.this, MainActivity.class);
 
                 UserEstudiante newUser = new UserEstudiante(rut, email, pin, tipoUsuario, carrera,semestre,jornada,sede);
                 String UserEs = mDatabase.child("Estudiantes").push().getKey();
                 mDatabase.child("Estudiantes").child(UserEs).setValue(newUser);
+                startActivity(intent);
 
             }
         });

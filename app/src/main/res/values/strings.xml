@@ -16,6 +16,7 @@
     <string name="correo_electronico">Correo electronico</string>
     <string-array name="tipo_usuario">
     </string-array>
+    <string name="MensajeError"></string>
 
     <!-- pantalla de login -->
     <string name="Bienvenido"></string>
@@ -28,6 +29,7 @@
     <string-array name="spinner_semestre"></string-array>
     <string name="radioGroups"></string>
     <string name="boton_siguiente_pro">Siguiente</string>
+    <string name="errorTextWiew"></string>
 
     <!-- pantalla de registro estudiante -->
     <string-array name="spinner_carrera"></string-array>

@@ -2,6 +2,7 @@ package com.example.seminario;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,7 @@ public class MainRegister extends AppCompatActivity {
         register_email = findViewById(R.id.register_email);
         register_pin = findViewById(R.id.register_pin);
         register_repitapin = findViewById(R.id.register_repitapin);
+        TextView MensajeError = findViewById(R.id.MensajeError);
 
         // Inicializa la instancia de Firebase Database
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -64,19 +66,26 @@ public class MainRegister extends AppCompatActivity {
                 String rut = register_rut.getText().toString();
                 String email = register_email.getText().toString();
                 String pin = register_pin.getText().toString();
+                String repitaPin = register_repitapin.getText().toString();
                 String selectedOption = tipo_usuario.getSelectedItem().toString();
-                if (selectedOption.equals("Estudiante")){
-                    // Navega al otro diseño al hacer clic en el botón
-                    Intent intent = new Intent(MainRegister.this, MainRegisterEstudiante.class);
-                    intent.putExtra("rut", rut);
-                    intent.putExtra("email", email);
-                    intent.putExtra("pin", pin);
-                    intent.putExtra("tipoUsuario", selectedOption);
-                    startActivity(intent);
 
-                } else if (selectedOption.equals("Docente")) {
-                    // Navega al otro diseño al hacer clic en el botón
-                    Intent intent = new Intent(MainRegister.this, MainRegisterProfesor.class);
+                if (TextUtils.isEmpty(rut) || TextUtils.isEmpty(email)
+                        || TextUtils.isEmpty(pin) || TextUtils.isEmpty(repitaPin)) {
+                    // Mostrar mensaje de error si algún campo está vacío
+                    MensajeError.setText("Completa todos los campos");
+                } else if (!pin.equals(repitaPin)) {
+                    // Mostrar mensaje de error si las contraseñas no coinciden
+                    MensajeError.setText("Las contraseñas no coinciden");
+                } else {
+                    // Navegar al otro diseño al hacer clic en el botón
+                    Intent intent;
+                    if (selectedOption.equals("Estudiante")) {
+                        intent = new Intent(MainRegister.this, MainRegisterEstudiante.class);
+                    } else {
+                        intent = new Intent(MainRegister.this, MainRegisterProfesor.class);
+                    }
+
+                    // Agregar datos adicionales al intent
                     intent.putExtra("rut", rut);
                     intent.putExtra("email", email);
                     intent.putExtra("pin", pin);
