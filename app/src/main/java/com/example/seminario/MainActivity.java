@@ -18,6 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         boton_login = findViewById(R.id.boton_login);
         mAuth = FirebaseAuth.getInstance();
         TextView Noregistrado = findViewById(R.id.Noregistrado);
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
         Noregistrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,33 +56,50 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String rut = login_rut.getText().toString();
                 String pin = login_pin.getText().toString();
+                iniciarSesionPersonalizada(rut,pin);
 
-                if (!TextUtils.isEmpty(rut) && !TextUtils.isEmpty(pin)) {
-                    // Iniciar sesión con Firebase Authentication
-                    mAuth.signInWithEmailAndPassword(rut, pin)
-                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Inicio de sesión exitoso
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        // Puedes redirigir a la siguiente actividad
-                                        Intent intent = new Intent(MainActivity.this, MainInicio.class);
-                                        startActivity(intent);
-                                    } else {
-                                        // Si el inicio de sesión falla, muestra un mensaje al usuario.
-                                        Toast.makeText(MainActivity.this, "Inicio de sesión fallido. Verifica tus credenciales.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                } else {
-                    // Mostrar mensaje de error si los campos están vacíos
-                    Toast.makeText(MainActivity.this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
                 }
+        });
+    }
+    private void iniciarSesionPersonalizada(String rut, String pin){
+        if(verificarCredencialesEnBD(rut,pin)){
+            Intent intent=new Intent(MainActivity.this,MainInicio.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this,"Credenciales incorrectas",Toast.LENGTH_SHORT).show();
+        }
+    }
+    private boolean verificarCredencialesEnBD(String rut, String pin) {
+        // Supongamos que tienes una referencia a tu base de datos de Firebase
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Estudiantes");
+
+        // Realiza una consulta para encontrar el usuario con el Rut proporcionado
+        ref.orderByChild("rut").equalTo(rut).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    // Para cada usuario con el Rut proporcionado, verifica el pin
+                    String pinFromDatabase = userSnapshot.child("pin").getValue(String.class);
+                    if (pinFromDatabase != null && pinFromDatabase.equals(pin)) {
+                        // Las credenciales son correctas
+                        // Retorna true o realiza alguna acción según tu lógica
+                        callback.onAutenticacionExitosa();
+                        return;
+                    }
+                }
+                callback.onAutenticacionFallida();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar errores de base de datos si es necesario
             }
         });
 
-
+        // El método es asíncrono, por lo que no puedes retornar directamente aquí
+        // Retorna false por defecto o realiza alguna acción según tu lógica
+        return false;
     }
+    verificarCredencialesEnBD
+
 }
