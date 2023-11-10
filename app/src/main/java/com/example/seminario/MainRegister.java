@@ -3,6 +3,7 @@ package com.example.seminario;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainRegister extends AppCompatActivity {
 
@@ -73,6 +77,14 @@ public class MainRegister extends AppCompatActivity {
                         || TextUtils.isEmpty(pin) || TextUtils.isEmpty(repitaPin)) {
                     // Mostrar mensaje de error si algún campo está vacío
                     MensajeError.setText("Completa todos los campos");
+                } else if (!isValidRut(rut)) {
+                    // Mostrar mensaje de error si el rut no cumple con el formato
+                    MensajeError.setText("Formato de Rut invalido");
+                } else if (!isValidEmail(email)) {
+                    // Mostrar mensaje de error si el correo no cumple con el formato
+                    MensajeError.setText("Formato de correo invalido");
+                } else if (pin.length() > 6) {
+                    MensajeError.setText("El PIN debe tener como maximo 6 caracteres");
                 } else if (!pin.equals(repitaPin)) {
                     // Mostrar mensaje de error si las contraseñas no coinciden
                     MensajeError.setText("Las contraseñas no coinciden");
@@ -112,6 +124,19 @@ public class MainRegister extends AppCompatActivity {
 
 
     }
+
+    // Función para validar el formato del Rut
+    private boolean isValidRut(String rut) {
+        String rutRegex = "^(\\d{1,3}(\\.\\d{3}){2}-[0-9kK])?$";
+        Pattern pattern = Pattern.compile(rutRegex);
+        Matcher matcher = pattern.matcher(rut);
+        return matcher.matches();
+    }
+    // Función para validar el formato del Correo
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
 }
 
 
