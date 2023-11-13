@@ -38,5 +38,9 @@
     <string-array name="spinner_jornada"></string-array>
     <string name="boton_registrarse_est"></string>
 
+    <!-- pantalla de registro estudiante -->
+    <string name="nombre_estudiante"></string>
+    <string name="correo_estudiante"></string>
+
 
 </resources>

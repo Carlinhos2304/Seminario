@@ -8,5 +8,5 @@ public class MainInicioEs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inicio);
+        setContentView(R.layout.inicio_estudiante);
 }}
