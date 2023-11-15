@@ -1,6 +1,8 @@
 package com.example.seminario;
 
 public class UserEstudiante {
+
+    private String nombre_Apellido;
     private String rut;
     private String email;
     private String pin;
@@ -14,7 +16,8 @@ public class UserEstudiante {
         // Constructor vacío requerido para Firebase
     }
 
-    public UserEstudiante(String rut, String email, String pin, String tipoUsuario, String spinner_carrera,String spinner_semestre_es, String spinner_jornada, String spinner_sede) {
+    public UserEstudiante(String nombre_Apellido, String rut, String email, String pin, String tipoUsuario, String spinner_carrera,String spinner_semestre_es, String spinner_jornada, String spinner_sede) {
+        this.nombre_Apellido = nombre_Apellido;
         this.rut = rut;
         this.email = email;
         this.pin = pin;
@@ -26,6 +29,14 @@ public class UserEstudiante {
     }
 
     // Agrega los métodos getter y setter para acceder a los campos
+
+    public String getnombre_Apellido() {
+        return nombre_Apellido;
+    }
+
+    public void setnombre_Apellido(String nombre_Apellido) {
+        this.nombre_Apellido = nombre_Apellido;
+    }
     public String getRut() {
         return rut;
     }

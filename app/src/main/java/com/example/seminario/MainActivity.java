@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                         UserProfesor userProfesor = userSnapshot.getValue(UserProfesor.class);
                                         if (userProfesor != null && userProfesor.getPin().equals(pin)) {
                                             // Credenciales correctas para profesor
-                                            Intent intent = new Intent(MainActivity.this, MainInicioPro.class);
+                                            Intent intent = new Intent(MainActivity.this, MainSeccionProfesor.class);
                                             startActivity(intent);
                                         } else {
                                             // PIN incorrecto para profesor

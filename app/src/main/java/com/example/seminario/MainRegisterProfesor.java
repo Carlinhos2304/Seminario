@@ -98,7 +98,9 @@ public class MainRegisterProfesor extends AppCompatActivity {
                         public void onClick(View v) {
                             String semestre = spinner_semestre.getSelectedItem().toString();
                             ArrayList<String> asignaturas = new ArrayList<>();
+
                             // Recupera los datos adicionales del Intent
+                            String nombre_Apellido = getIntent().getStringExtra("nombre_Apellido");
                             String rut = getIntent().getStringExtra("rut");
                             String email = getIntent().getStringExtra("email");
                             String pin = getIntent().getStringExtra("pin");
@@ -120,7 +122,7 @@ public class MainRegisterProfesor extends AppCompatActivity {
                             }
                             if (!asignaturas.isEmpty()){
                                 Intent intent = new Intent(MainRegisterProfesor.this, MainActivity.class);
-                                UserProfesor newUser = new UserProfesor(rut, email, pin, tipoUsuario, semestre, asignaturas);
+                                UserProfesor newUser = new UserProfesor(nombre_Apellido,rut, email, pin, tipoUsuario, semestre, asignaturas);
                                 String UserPro = mDatabase.child("Profesores").push().getKey();
                                 mDatabase.child("Profesores").child(UserPro).setValue(newUser);
                                 startActivity(intent);
@@ -161,7 +163,9 @@ public class MainRegisterProfesor extends AppCompatActivity {
                         public void onClick(View v) {
                             String semestre = spinner_semestre.getSelectedItem().toString();
                             ArrayList<String> asignaturas = new ArrayList<>();
+
                             // Recupera los datos adicionales del Intent
+                            String nombre_Apellido = getIntent().getStringExtra("nombre_Apellido");
                             String rut = getIntent().getStringExtra("rut");
                             String email = getIntent().getStringExtra("email");
                             String pin = getIntent().getStringExtra("pin");
@@ -186,7 +190,7 @@ public class MainRegisterProfesor extends AppCompatActivity {
                             }
                             if (!asignaturas.isEmpty()){
                                 Intent intent = new Intent(MainRegisterProfesor.this, MainActivity.class);
-                                UserProfesor newUser = new UserProfesor(rut, email, pin, tipoUsuario, semestre, asignaturas);
+                                UserProfesor newUser = new UserProfesor(nombre_Apellido,rut, email, pin, tipoUsuario, semestre, asignaturas);
                                 String UserPro = mDatabase.child("Profesores").push().getKey();
                                 mDatabase.child("Profesores").child(UserPro).setValue(newUser);
                                 startActivity(intent);
@@ -197,72 +201,6 @@ public class MainRegisterProfesor extends AppCompatActivity {
                     });
 
                 } else if (selectedOption.equals("3° Semestre")) {
-                    // Agrega las opciones específicas para Opción 2
-                    CheckBox CheckBox1 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox1.setText("Innovación y Emprendimiento I");
-                    radioGroups.addView(CheckBox1);
-
-                    CheckBox CheckBox2 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox2.setText("Programación Back End");
-                    radioGroups.addView(CheckBox2);
-
-                    CheckBox CheckBox3 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox3.setText("Aplicaciones Móviles para IoT");
-                    radioGroups.addView(CheckBox3);
-
-                    CheckBox CheckBox4 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox4.setText("Ingeniería de Software");
-                    radioGroups.addView(CheckBox4);
-
-                    CheckBox CheckBox5 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox5.setText("Electivo de Tendencias del Sector Productivo y de Servicios II");
-                    radioGroups.addView(CheckBox5);
-
-                    CheckBox CheckBox6 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox6.setText("Taller de Diseño y Desarrollo de Soluciones");
-                    radioGroups.addView(CheckBox6);
-                    boton_siguiente_pro.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String semestre = spinner_semestre.getSelectedItem().toString();
-                            ArrayList<String> asignaturas = new ArrayList<>();
-                            // Recupera los datos adicionales del Intent
-                            String rut = getIntent().getStringExtra("rut");
-                            String email = getIntent().getStringExtra("email");
-                            String pin = getIntent().getStringExtra("pin");
-                            String tipoUsuario = getIntent().getStringExtra("tipoUsuario");
-                            if (CheckBox1.isChecked()) {
-                                asignaturas.add(CheckBox1.getText().toString());
-                            }
-                            if (CheckBox2.isChecked()) {
-                                asignaturas.add(CheckBox2.getText().toString());
-                            }
-                            if (CheckBox3.isChecked()) {
-                                asignaturas.add(CheckBox3.getText().toString());
-                            }
-                            if (CheckBox4.isChecked()) {
-                                asignaturas.add(CheckBox4.getText().toString());
-                            }
-                            if (CheckBox5.isChecked()) {
-                                asignaturas.add(CheckBox5.getText().toString());
-                            }
-                            if (CheckBox6.isChecked()) {
-                                asignaturas.add(CheckBox6.getText().toString());
-                            }
-                            if (!asignaturas.isEmpty()){
-                                Intent intent = new Intent(MainRegisterProfesor.this, MainActivity.class);
-                                UserProfesor newUser = new UserProfesor(rut, email, pin, tipoUsuario, semestre, asignaturas);
-                                String UserPro = mDatabase.child("Profesores").push().getKey();
-                                mDatabase.child("Profesores").child(UserPro).setValue(newUser);
-                                startActivity(intent);
-                            } else {
-                                errorTextView.setText("Selecciona al menos una asignatura");
-                            }
-                        }
-                    });
-
-
-                } else if (selectedOption.equals("4° Semestre")) {
                     // Agrega las opciones específicas para Opción 2
                     CheckBox CheckBox1 = new CheckBox(MainRegisterProfesor.this);
                     CheckBox1.setText("Inglés I");
@@ -292,7 +230,9 @@ public class MainRegisterProfesor extends AppCompatActivity {
                         public void onClick(View v) {
                             String semestre = spinner_semestre.getSelectedItem().toString();
                             ArrayList<String> asignaturas = new ArrayList<>();
+
                             // Recupera los datos adicionales del Intent
+                            String nombre_Apellido = getIntent().getStringExtra("nombre_Apellido");
                             String rut = getIntent().getStringExtra("rut");
                             String email = getIntent().getStringExtra("email");
                             String pin = getIntent().getStringExtra("pin");
@@ -317,7 +257,7 @@ public class MainRegisterProfesor extends AppCompatActivity {
                             }
                             if (!asignaturas.isEmpty()){
                                 Intent intent = new Intent(MainRegisterProfesor.this, MainActivity.class);
-                                UserProfesor newUser = new UserProfesor(rut, email, pin, tipoUsuario, semestre, asignaturas);
+                                UserProfesor newUser = new UserProfesor(nombre_Apellido,rut, email, pin, tipoUsuario, semestre, asignaturas);
                                 String UserPro = mDatabase.child("Profesores").push().getKey();
                                 mDatabase.child("Profesores").child(UserPro).setValue(newUser);
                                 startActivity(intent);
@@ -326,6 +266,76 @@ public class MainRegisterProfesor extends AppCompatActivity {
                             }
                         }
                     });
+
+                } else if (selectedOption.equals("4° Semestre")) {
+                    // Agrega las opciones específicas para Opción 2
+                    CheckBox CheckBox1 = new CheckBox(MainRegisterProfesor.this);
+                    CheckBox1.setText("Innovación y Emprendimiento I");
+                    radioGroups.addView(CheckBox1);
+
+                    CheckBox CheckBox2 = new CheckBox(MainRegisterProfesor.this);
+                    CheckBox2.setText("Programación Back End");
+                    radioGroups.addView(CheckBox2);
+
+                    CheckBox CheckBox3 = new CheckBox(MainRegisterProfesor.this);
+                    CheckBox3.setText("Aplicaciones Móviles para IoT");
+                    radioGroups.addView(CheckBox3);
+
+                    CheckBox CheckBox4 = new CheckBox(MainRegisterProfesor.this);
+                    CheckBox4.setText("Ingeniería de Software");
+                    radioGroups.addView(CheckBox4);
+
+                    CheckBox CheckBox5 = new CheckBox(MainRegisterProfesor.this);
+                    CheckBox5.setText("Electivo de Tendencias del Sector Productivo y de Servicios II");
+                    radioGroups.addView(CheckBox5);
+
+                    CheckBox CheckBox6 = new CheckBox(MainRegisterProfesor.this);
+                    CheckBox6.setText("Taller de Diseño y Desarrollo de Soluciones");
+                    radioGroups.addView(CheckBox6);
+                    boton_siguiente_pro.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String semestre = spinner_semestre.getSelectedItem().toString();
+                            ArrayList<String> asignaturas = new ArrayList<>();
+
+                            // Recupera los datos adicionales del Intent
+                            String nombre_Apellido = getIntent().getStringExtra("nombre_Apellido");
+                            String rut = getIntent().getStringExtra("rut");
+                            String email = getIntent().getStringExtra("email");
+                            String pin = getIntent().getStringExtra("pin");
+                            String tipoUsuario = getIntent().getStringExtra("tipoUsuario");
+                            if (CheckBox1.isChecked()) {
+                                asignaturas.add(CheckBox1.getText().toString());
+                            }
+                            if (CheckBox2.isChecked()) {
+                                asignaturas.add(CheckBox2.getText().toString());
+                            }
+                            if (CheckBox3.isChecked()) {
+                                asignaturas.add(CheckBox3.getText().toString());
+                            }
+                            if (CheckBox4.isChecked()) {
+                                asignaturas.add(CheckBox4.getText().toString());
+                            }
+                            if (CheckBox5.isChecked()) {
+                                asignaturas.add(CheckBox5.getText().toString());
+                            }
+                            if (CheckBox6.isChecked()) {
+                                asignaturas.add(CheckBox6.getText().toString());
+                            }
+                            if (!asignaturas.isEmpty()){
+                                Intent intent = new Intent(MainRegisterProfesor.this, MainActivity.class);
+                                UserProfesor newUser = new UserProfesor(nombre_Apellido,rut, email, pin, tipoUsuario, semestre, asignaturas);
+                                String UserPro = mDatabase.child("Profesores").push().getKey();
+                                mDatabase.child("Profesores").child(UserPro).setValue(newUser);
+                                startActivity(intent);
+                            } else {
+                                errorTextView.setText("Selecciona al menos una asignatura");
+                            }
+                        }
+                    });
+
+
+
 
                 }
             }

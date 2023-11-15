@@ -3,6 +3,8 @@ package com.example.seminario;
 import java.util.ArrayList;
 
 public class UserProfesor {
+
+    private String nombre_Apellido;
     private String rut;
     private String email;
     private String pin;
@@ -15,7 +17,8 @@ public class UserProfesor {
         // Constructor vacío requerido para Firebase
     }
 
-    public UserProfesor(String rut, String email, String pin, String tipoUsuario, String spinner_semestre, ArrayList<String> asignaturas) {
+    public UserProfesor(String nombre_Apellido, String rut, String email, String pin, String tipoUsuario, String spinner_semestre, ArrayList<String> asignaturas) {
+        this.nombre_Apellido = nombre_Apellido;
         this.rut = rut;
         this.email = email;
         this.pin = pin;
@@ -25,6 +28,14 @@ public class UserProfesor {
     }
 
     // Agrega los métodos getter y setter para acceder a los campos
+
+    public String getnombre_Apellido() {
+        return nombre_Apellido;
+    }
+
+    public void setnombre_Apellido(String nombre_Apellido) {
+        this.nombre_Apellido = nombre_Apellido;
+    }
     public String getRut() {
         return rut;
     }

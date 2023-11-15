@@ -80,14 +80,16 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                 String semestre = spinner_semestre_es.getSelectedItem().toString();
                 String jornada = spinner_jornada.getSelectedItem().toString();
                 String sede = spinner_sede.getSelectedItem().toString();
+
                 // Recupera los datos adicionales del Intent
+                String nombre_Apellido = getIntent().getStringExtra("nombre_Apellido");
                 String rut = getIntent().getStringExtra("rut");
                 String email = getIntent().getStringExtra("email");
                 String pin = getIntent().getStringExtra("pin");
                 String tipoUsuario = getIntent().getStringExtra("tipoUsuario");
                 Intent intent = new Intent(MainRegisterEstudiante.this, MainActivity.class);
 
-                UserEstudiante newUser = new UserEstudiante(rut, email, pin, tipoUsuario, carrera,semestre,jornada,sede);
+                UserEstudiante newUser = new UserEstudiante(nombre_Apellido,rut, email, pin, tipoUsuario, carrera,semestre,jornada,sede);
                 String UserEs = mDatabase.child("Estudiantes").push().getKey();
                 mDatabase.child("Estudiantes").child(UserEs).setValue(newUser);
                 startActivity(intent);

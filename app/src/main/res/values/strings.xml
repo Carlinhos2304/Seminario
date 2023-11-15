@@ -1,6 +1,7 @@
 <resources>
     <!-- pantalla de registro -->
     <string name="app_name">RegisterToken</string>
+    <string name="register_nombre"></string>
     <string name="register_rut"></string>
     <string name="register_email"></string>
     <string name="register_pin"></string>
@@ -41,6 +42,12 @@
     <!-- pantalla de registro estudiante -->
     <string name="nombre_estudiante"></string>
     <string name="correo_estudiante"></string>
+
+    <string name="nombresAlumnos"></string>
+    <string name="todo">TODO</string>
+    <string name="todoo">TODO</string>
+    <string name="todos_los_alumnos">Todos los Alumnos</string>
+    <string name="container_layout_id">containerLayout</string>
 
 
 </resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/item_estudiante.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/cuadro_redondo"
+    android:padding="18dp"
+    android:clickable="true"
+    android:onClick="onItemClick">>
+
+    <ImageView
+        android:id="@+id/iconoUsuario"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/user_solid" />
+    <ImageView
+        android:id="@+id/otraImagen"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/angle_right_solid"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/textViewNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iconoUsuario"
+        android:fontFamily="@font/lilita_one"
+        android:text="Nombre y Apellido"
+        android:textColor="#000000"
+
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_carrera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNombre"
+        android:layout_toEndOf="@id/iconoUsuario"
+        android:fontFamily="@font/lilita_one"
+        android:text="Carrera" />
+
+    <!-- Agrega más TextViews según sea necesario para otros datos del estudiante -->
+</RelativeLayout>

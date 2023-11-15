@@ -25,6 +25,7 @@ public class MainRegister extends AppCompatActivity {
     private Button boton_siguiente;
     private TextView Yaregistrado;
 
+    private EditText register_nombre;
     private EditText register_rut;
     private EditText register_email;
     private EditText register_pin;
@@ -38,6 +39,7 @@ public class MainRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        register_nombre = findViewById(R.id.register_nombre);
         tipo_usuario = findViewById(R.id.tipo_usuario);
         boton_siguiente = findViewById(R.id.boton_registrarse);
         Yaregistrado = findViewById(R.id.Yaregistrado);
@@ -67,6 +69,7 @@ public class MainRegister extends AppCompatActivity {
         boton_siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String nombre_Apellido = register_nombre.getText().toString();
                 String rut = register_rut.getText().toString();
                 String email = register_email.getText().toString();
                 String pin = register_pin.getText().toString();
@@ -98,6 +101,7 @@ public class MainRegister extends AppCompatActivity {
                     }
 
                     // Agregar datos adicionales al intent
+                    intent.putExtra("nombre_Apellido", nombre_Apellido);
                     intent.putExtra("rut", rut);
                     intent.putExtra("email", email);
                     intent.putExtra("pin", pin);
