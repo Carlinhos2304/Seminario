@@ -67,6 +67,12 @@
     <string name="editTextPlazo"></string>
     <string-array name="spinnerTokens"></string-array>
 
+    <!-- pantalla de item token profesor-->
+    <string name="TextViewCodigo"></string>
+
+    <!-- pantalla Tokens profesor -->
+    <string name="boton_agregar_token"></string>
+
 
 
 </resources>
