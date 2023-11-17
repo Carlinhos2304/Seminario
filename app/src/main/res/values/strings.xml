@@ -43,11 +43,30 @@
     <string name="nombre_estudiante"></string>
     <string name="correo_estudiante"></string>
 
+
+
     <string name="nombresAlumnos"></string>
     <string name="todo">TODO</string>
     <string name="todoo">TODO</string>
     <string name="todos_los_alumnos">Todos los Alumnos</string>
     <string name="container_layout_id">containerLayout</string>
+
+
+    <!-- pantalla de Detalles alumno profesor -->
+    <string name="textViewNombre"></string>
+    <string name="textViewEmail"></string>
+    <string name="textViewRut"></string>
+    <string name="textViewCarrera"></string>
+    <string name="textViewJornada"></string>
+    <string name="textViewSede"></string>
+    <string name="boton_asignarToken"></string>
+
+    <!-- pantalla de Reglas de token-->
+    <string name="botonAsignar"></string>
+    <string name="editTextRecompensa"></string>
+    <string name="editTextPlazo"></string>
+    <string-array name="spinnerTokens"></string-array>
+
 
 
 </resources>

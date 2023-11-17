@@ -76,7 +76,7 @@ public class MainSeccionProfesor extends AppCompatActivity {
 
     private void abrirSeccionEspecifica(UserEstudiante estudiante) {
         Intent intent = new Intent(MainSeccionProfesor.this, MainDetallesAlumno.class);
-        intent.putExtra("estudiante", (CharSequence) estudiante);
+        intent.putExtra("estudiante", estudiante);
         startActivity(intent);
     }
 }
