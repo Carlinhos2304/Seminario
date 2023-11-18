@@ -66,12 +66,24 @@
     <string name="editTextRecompensa"></string>
     <string name="editTextPlazo"></string>
     <string-array name="spinnerTokens"></string-array>
+    <string name="aSeccionToken"></string>
 
     <!-- pantalla de item token profesor-->
     <string name="TextViewCodigo"></string>
 
     <!-- pantalla Tokens profesor -->
     <string name="boton_agregar_token"></string>
+    <string name="buttonAgregarNuevoToken"></string>
+    <string name="editTextCodigoToken"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="inicio">Inicio</string>
+    <string name="tokens">Tokens</string>
+    <string name="alumno">Alumno</string>
+    <string name="asignatura">Asignatura</string>
+    <string name="perfil">Perfil</string>
+    <string name="bottom_navigation">bottom_navigation</string>
+    <string name="boton1">Ver Mas</string>
 
 
 

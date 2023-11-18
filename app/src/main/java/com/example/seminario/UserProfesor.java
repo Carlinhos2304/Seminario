@@ -1,6 +1,8 @@
 package com.example.seminario;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserProfesor {
 
@@ -11,6 +13,8 @@ public class UserProfesor {
     private String tipoUsuario;
     private String spinner_semestre;
     private ArrayList<String> asignaturas;
+    private ArrayList<UserToken> tokens; // Agrega esta línea
+
 
 
     public UserProfesor() {
@@ -25,6 +29,7 @@ public class UserProfesor {
         this.tipoUsuario = tipoUsuario;
         this.spinner_semestre = spinner_semestre;
         this.asignaturas = asignaturas;
+        this.tokens = new ArrayList<>(); // Inicializa la lista de tokens
     }
 
     // Agrega los métodos getter y setter para acceder a los campos
@@ -80,5 +85,27 @@ public class UserProfesor {
 
     public void setAsignaturas(ArrayList<String> asignaturas) {
         this.asignaturas = asignaturas;
+    }
+    // Resto de los métodos getter y setter
+
+    public ArrayList<UserToken> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(ArrayList<UserToken> tokens) {
+        this.tokens = tokens;
+    }
+    // Método para convertir a un mapa para Firebase
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("nombre_Apellido", nombre_Apellido);
+        result.put("rut", rut);
+        result.put("email", email);
+        result.put("pin", pin);
+        result.put("tipoUsuario", tipoUsuario);
+        result.put("spinner_semestre", spinner_semestre);
+        result.put("asignaturas", asignaturas);
+        result.put("tokens", tokens);
+        return result;
     }
 }

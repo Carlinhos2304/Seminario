@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                                     } else if (selectedUsuario.equals("Docente")) {
                                         UserProfesor userProfesor = userSnapshot.getValue(UserProfesor.class);
                                         if (userProfesor != null && userProfesor.getPin().equals(pin)) {
+
+                                            // Configura el profesor en la clase de aplicación personalizada
+                                            MyApplicationData.getInstance().setProfesor(userProfesor);
+
                                             // Credenciales correctas para profesor
                                             Intent intent = new Intent(MainActivity.this, MainSeccionProfesor.class);
                                             startActivity(intent);

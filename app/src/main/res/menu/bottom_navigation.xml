@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Inicio"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:title="inicio"/>
+
+    <item
+        android:id="@+id/tokens"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:title="Tokens"/>
+
+    <item
+        android:id="@+id/alumno"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:title="Alumnos"/>
+
+    <item
+        android:id="@+id/asignatura"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:title="Asignaturas"/>
+
+    <item
+        android:id="@+id/perfil"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:title="Perfil"/>
+</menu>
