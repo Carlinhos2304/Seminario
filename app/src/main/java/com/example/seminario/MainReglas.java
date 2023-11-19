@@ -2,6 +2,7 @@ package com.example.seminario;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,8 +13,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.trusted.Token;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainReglas extends AppCompatActivity {
 
@@ -24,6 +31,7 @@ public class MainReglas extends AppCompatActivity {
     private Button Agregar;
 
     private DatabaseReference databaseReference;
+    private String rutFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +52,18 @@ public class MainReglas extends AppCompatActivity {
         Intent intent = getIntent();
         UserEstudiante estudiante = intent.getParcelableExtra("estudiante");
 
-        // Configurar el adaptador para el spinner (puedes obtener tus tokens de la base de datos aquí)
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, obtenerTokens());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTokens.setAdapter(adapter);
+        // Obtener el RUT del profesor actual
+        UserProfesor profesor = MyApplicationData.getInstance().getProfesor();
+        rutFirebase = profesor.getRut().replace(".", "").replace("-", "");
+
+
+
+
+
+        // Configurar el adaptador para el spinner
+        obtenerTokens(rutFirebase);
+
+
 
         Agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,18 +79,95 @@ public class MainReglas extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 asignarToken(estudiante);
+                Intent intent = new Intent(MainReglas.this, MainAsignadoCorrectamente.class);
+                startActivity(intent);
             }
         });
     }
-        private void asignarToken( UserEstudiante estudiante) {
 
-        }
 
-        private String[] obtenerTokens() {
-            // Aquí puedes obtener los nombres de los tokens de la base de datos
-            // Por ahora, simplemente devolveré algunos valores de ejemplo
-            return new String[]{"Token1", "Token2", "Token3"};
-        }
+    private void obtenerTokens(String rutFirebase) {
+
+        // Obtener los tokens asociados al mismo RUT del profesor
+        DatabaseReference tokensRef = FirebaseDatabase.getInstance().getReference("Profesores")
+                .child(rutFirebase)
+                .child("tokens");
+
+        tokensRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> tokenCodes = new ArrayList<>();
+                for (DataSnapshot tokenSnapshot : dataSnapshot.getChildren()) {
+                    UserToken token = tokenSnapshot.getValue(UserToken.class);
+                    if (token != null) {
+                        // Solo agregar tokens con el mismo rutProfesor
+                        tokenCodes.add(token.getCodigo());
+                    }
+                }
+
+                // Configurar el adaptador para el spinner con los códigos de los tokens
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(MainReglas.this, android.R.layout.simple_spinner_item, tokenCodes);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerTokens.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar el error si es necesario
+                Toast.makeText(MainReglas.this, "Error al obtener tokens", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+    private void asignarToken(UserEstudiante estudiante) {
+        // Obtén el código del token seleccionado del Spinner
+        String codigoToken = spinnerTokens.getSelectedItem().toString();
+
+        // Verifica que se haya seleccionado un token
+        if (codigoToken.isEmpty()) {
+            Toast.makeText(MainReglas.this, "Seleccione un token", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Obtén la referencia del token en la base de datos
+        DatabaseReference tokenRef = FirebaseDatabase.getInstance().getReference("Profesores")
+                .child(rutFirebase)
+                .child("tokens")
+                .child(codigoToken);
+
+        // Obtén los valores de recompensa y plazo desde los EditText
+        String recompensa = editTextRecompensa.getText().toString().trim();
+        String plazo = editTextPlazo.getText().toString().trim();
+
+        // Actualiza los valores del token con la recompensa, plazo y el rut del estudiante
+        tokenRef.child("recompensa").setValue(recompensa);
+        tokenRef.child("plazoEntrega").setValue(plazo);
+        tokenRef.child("rutAlumno").setValue(estudiante.getRut());
+
+        // Elimina el token del Spinner
+        eliminarTokenDelSpinner(codigoToken);
+
+        // Vuelve a cargar la lista de tokens en el Spinner
+        obtenerTokens(rutFirebase);
+
+        // Informa al usuario que la asignación se realizó con éxito
+        Toast.makeText(MainReglas.this, "Token asignado correctamente", Toast.LENGTH_SHORT).show();
+    }
+
+    private void eliminarTokenDelSpinner(String codigoToken) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Remueve el código del token del adaptador del Spinner
+                ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinnerTokens.getAdapter();
+                adapter.remove(codigoToken);
+
+                // Notifica al adaptador que los datos han cambiado
+                adapter.notifyDataSetChanged();
+                // Mensaje de log para verificar la eliminación
+                Log.d("EliminacionToken", "Token eliminado: " + codigoToken);
+            }
+        });
+
+}}
 
 
