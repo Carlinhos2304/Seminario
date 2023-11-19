@@ -16,8 +16,20 @@ public class MyApplicationData {
         }
         return instance;
     }
+    public String getFormattedRut() {
+        if (profesor != null) {
+            // Obtener el RUT del profesor
+            String rut = profesor.getRut();
+
+            // Eliminar puntos y guiones del RUT
+            return rut.replaceAll("[.-]", "");
+        }
+        return null;
+    }
+
 
     public UserProfesor getProfesor() {
+
         return profesor;
     }
 

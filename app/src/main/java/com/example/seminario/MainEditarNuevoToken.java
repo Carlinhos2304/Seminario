@@ -34,7 +34,7 @@ public class MainEditarNuevoToken extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 agregarToken();
-                Intent intent = new Intent(MainEditarNuevoToken.this, MainTokensProfesor.class);
+                Intent intent = new Intent(MainEditarNuevoToken.this, MainSeccionProfesor.class);
                 startActivity(intent);
             }
         });
@@ -48,24 +48,26 @@ public class MainEditarNuevoToken extends AppCompatActivity {
         UserProfesor profesor = MyApplicationData.getInstance().getProfesor();
         Log.d("MainEditarNuevoToken", "Profesor: " + profesor);
 
-        String rutProfesor = profesor.getRut();
-
-        // Validar que el código no esté vacío
+        // Validar que el código no esté vacío y que el profesor no sea nulo
         if (!TextUtils.isEmpty(codigo) && profesor != null) {
-            // Crear una instancia de Token con el código
-            UserToken token = new UserToken(codigo,rutProfesor, "", "","");
+            // Crear una instancia de UserToken con el código
+            UserToken token = new UserToken(codigo, profesor.getRut(), "", "");
+            String rutFirebase = profesor.getRut().replace(".", "").replace("-", "");
 
-            // Obtener una referencia a la colección "tokens" en la base de datos
+            // Agregar el nuevo token directamente a la colección "tokens" con el código como clave
             DatabaseReference profesorRef = FirebaseDatabase.getInstance().getReference("Profesores")
-                    .child("tokens");
+                    .child(rutFirebase);
 
-            // Agregar el token a la base de datos
-            profesorRef.push().setValue(token);
+            // Agregar el nuevo token a la lista de tokens del profesor
+            profesorRef.child("tokens").child(codigo).setValue(token);
 
-            // Limpiar el EditText después de agregar el token
-            editTextCodigoToken.setText("");
+            // Actualizar el profesor en MyApplicationData
+            profesor.agregarToken(token);
+            MyApplicationData.getInstance().setProfesor(profesor);
+
+
         } else {
-            // Mostrar un mensaje de error si el código está vacío o no se ha obtenido el profesor
+            // Mostrar un mensaje de error si el código está vacío o el profesor es nulo
             Toast.makeText(MainEditarNuevoToken.this, "Ingrese un código de token válido", Toast.LENGTH_SHORT).show();
         }
     }

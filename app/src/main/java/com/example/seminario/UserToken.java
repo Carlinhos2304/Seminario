@@ -7,7 +7,6 @@ public class UserToken {
     private String codigo;
     private String recompensa;
     private String plazoEntrega;
-    private String rutProfesor;
     private String rutAlumno;
 
 
@@ -15,9 +14,8 @@ public class UserToken {
         // Constructor vacío requerido para Firebase
     }
 
-    public UserToken(String codigo, String recompensa, String plazoEntrega, String rutProfesor, String rutAlumno) {
+    public UserToken(String codigo, String recompensa, String plazoEntrega, String rutAlumno) {
         this.codigo = codigo;
-        this.rutProfesor = rutProfesor;
         this.rutAlumno = rutAlumno;
         this.recompensa = recompensa;
         this.plazoEntrega = plazoEntrega;
@@ -30,14 +28,6 @@ public class UserToken {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public String getRutProfesor() {
-        return rutProfesor;
-    }
-
-    public void setRutProfesor(String rutProfesor) {
-        this.rutProfesor = rutProfesor;
     }
 
     public String getRecompensa() {

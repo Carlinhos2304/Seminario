@@ -37,6 +37,9 @@ public class TokenAdapter extends RecyclerView.Adapter<TokenAdapter.TokenViewHol
     public int getItemCount() {
         return tokens.size();
     }
+    public void setTokens(List<UserToken> tokens) {
+        this.tokens = tokens;
+    }
 
     public class TokenViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewCodigo;  // Reemplaza "otroDato" con el nombre correcto del dato que quieras mostrar

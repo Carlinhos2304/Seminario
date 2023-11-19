@@ -38,6 +38,8 @@ public class MainTokensProfesor extends AppCompatActivity {
         
         // Obtener el profesor desde MyApplicationData
         UserProfesor profesor = MyApplicationData.getInstance().getProfesor();
+        String rutFirebase = profesor.getRut().replace(".", "").replace("-", "");
+
 
         agregarOtro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,9 +58,8 @@ public class MainTokensProfesor extends AppCompatActivity {
 
             // Obtener solo los tokens asociados al profesor específico
             DatabaseReference tokensRef = FirebaseDatabase.getInstance().getReference("Profesores")
-                    .child(profesor.getRut())
                     .child("tokens");
-            tokensRef.orderByChild("rutProfesor").equalTo(profesor.getRut()).addListenerForSingleValueEvent(new ValueEventListener() {
+            tokensRef.child(rutFirebase).child("tokens").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -68,11 +69,15 @@ public class MainTokensProfesor extends AppCompatActivity {
                         UserToken token = tokenSnapshot.getValue(UserToken.class);
                         if (token != null) {
                             tokenList.add(token);
+
+
                         }
                     }
 
                     // Notificar al adaptador que los datos han cambiado
                     tokenAdapter.notifyDataSetChanged();
+
+
                 }
 
                 @Override

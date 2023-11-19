@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                                         if (userEstudiante != null && userEstudiante.getPin().equals(pin)) {
                                             // Credenciales correctas para estudiante
                                             Intent intent = new Intent(MainActivity.this, MainInicioEs.class);
+
+                                            // Envía los datos del estudiante al MainInicioEs
+                                            intent.putExtra("estudiante", userEstudiante);
+
                                             startActivity(intent);
                                         } else {
                                             // PIN incorrecto para estudiante
