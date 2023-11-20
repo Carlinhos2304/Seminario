@@ -65,6 +65,11 @@ public class UserToken implements Parcelable{
         this.rutAlumno = rutAlumno;
     }
 
+    public void clearRutAlumno() {
+        this.rutAlumno = "";
+    }
+
+
     protected UserToken(Parcel in) {
         codigo = in.readString();
         nombreProfesor = in.readString();
@@ -91,9 +96,6 @@ public class UserToken implements Parcelable{
         return 0;
     }
 
-    public void clearRutAlumno() {
-        this.rutAlumno = "";
-    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

@@ -112,6 +112,8 @@ public class MainInicioEs extends AppCompatActivity {
 
     private void abrirSeccionEspecifica(UserToken token) {
         Intent intent = new Intent(MainInicioEs.this, MainDetallesToken.class);
+        intent.putExtra("estudiante", rut);
+        intent.putExtra("rut", rutFirebase);
         intent.putExtra("token", token);
         startActivity(intent);
     }
