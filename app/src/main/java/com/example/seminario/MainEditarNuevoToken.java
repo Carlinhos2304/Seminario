@@ -51,7 +51,7 @@ public class MainEditarNuevoToken extends AppCompatActivity {
         // Validar que el código no esté vacío y que el profesor no sea nulo
         if (!TextUtils.isEmpty(codigo) && profesor != null) {
             // Crear una instancia de UserToken con el código
-            UserToken token = new UserToken(codigo, profesor.getRut(), "", "");
+            UserToken token = new UserToken(codigo, profesor.getRut(), "", "", profesor.getnombre_Apellido());
             String rutFirebase = profesor.getRut().replace(".", "").replace("-", "");
 
             // Agregar el nuevo token directamente a la colección "tokens" con el código como clave

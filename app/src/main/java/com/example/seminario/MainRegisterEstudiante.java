@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainRegisterEstudiante extends AppCompatActivity {
 
@@ -62,6 +65,7 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, datos4);
         spinner_jornada.setAdapter(adapter4);
 
+
         Yaregistrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,12 +91,37 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                 String email = getIntent().getStringExtra("email");
                 String pin = getIntent().getStringExtra("pin");
                 String tipoUsuario = getIntent().getStringExtra("tipoUsuario");
+
                 Intent intent = new Intent(MainRegisterEstudiante.this, MainActivity.class);
 
-                UserEstudiante newUser = new UserEstudiante(nombre_Apellido,rut, email, pin, tipoUsuario, carrera,semestre,jornada,sede);
-                String UserEs = mDatabase.child("Estudiantes").push().getKey();
-                mDatabase.child("Estudiantes").child(UserEs).setValue(newUser);
-                startActivity(intent);
+                DatabaseReference profesoresRef = FirebaseDatabase.getInstance().getReference("Profesores");
+                profesoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot profesorSnapshot : dataSnapshot.getChildren()) {
+                            UserProfesor profesor = profesorSnapshot.getValue(UserProfesor.class);
+                            if (profesor != null && semestre.equals(profesor.getSpinner_semestre())) {
+                                // Encuentra un profesor con el semestre seleccionado
+
+                                String rutProfesorAsociado = profesor.getRut();
+                                // Crea y guarda al estudiante con el rut del profesor asociado
+                                UserEstudiante newUser = new UserEstudiante(nombre_Apellido, rut, email, pin, tipoUsuario, carrera, semestre, jornada, sede, rutProfesorAsociado);
+                                String UserEs = mDatabase.child("Estudiantes").push().getKey();
+                                mDatabase.child("Estudiantes").child(UserEs).setValue(newUser);
+                                startActivity(intent);
+                                return; // Sale del bucle cuando se encuentra un profesor
+                            }
+                        }
+                        // Manejar el caso cuando no se encuentra un profesor con el semestre seleccionado
+                        // Puedes mostrar un mensaje o manejarlo según tus necesidades
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Manejar el error si es necesario
+                        // (puedes mostrar un Toast o manejarlo de otra manera)
+                    }
+                });
 
             }
         });
@@ -100,4 +129,6 @@ public class MainRegisterEstudiante extends AppCompatActivity {
 
 
     }
+
+
 }

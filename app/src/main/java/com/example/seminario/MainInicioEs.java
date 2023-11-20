@@ -1,8 +1,11 @@
 package com.example.seminario;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,56 +21,78 @@ import java.util.List;
 
 public class MainInicioEs extends AppCompatActivity {
     private TextView textViewNombreEstudiante;
-    private RecyclerView recyclerViewTokensEstudiante;
+
+    private DatabaseReference databaseReference;
     private TokenAdapter tokenAdapterEstudiante;
-    private String rutEstudiante; // Agrega esta variable
+    private String rut; // Agrega esta variable
+
+    private String rutFirebase;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio_estudiante);
 
+
         // Obtén referencias a los elementos de la interfaz
         textViewNombreEstudiante = findViewById(R.id.nombre_estudiante);
-        recyclerViewTokensEstudiante = findViewById(R.id.recyclerViewTokensEstudiante);
+        RecyclerView recyclerViewTokensEstudiante = findViewById(R.id.recyclerViewTokensEstudiante);
+        recyclerViewTokensEstudiante.setLayoutManager(new LinearLayoutManager(this));
 
         // Obtén el objeto UserEstudiante de la actividad anterior
         UserEstudiante estudiante = getIntent().getParcelableExtra("estudiante");
 
-        // Verifica si el objeto estudiante y su rut no son nulos
-        if (estudiante != null && estudiante.getRut() != null) {
-            // Guarda el rut del estudiante para usarlo al obtener los tokens
-            rutEstudiante = estudiante.getRut();
+        // Obtener el RUT del profesor actual
+        UserProfesor profesor = MyApplicationData.getInstance().getProfesor();
 
-            // Resto del código...
-        }
+        TextView textViewNombre = findViewById(R.id.textViewNombre);
+        TextView textViewEmail = findViewById(R.id.textViewEmail);
+        textViewNombre.setText(estudiante.getnombre_Apellido());
+        textViewEmail.setText(estudiante.getEmail());
 
-        // Configura el RecyclerView
-        recyclerViewTokensEstudiante.setLayoutManager(new LinearLayoutManager(this));
-        tokenAdapterEstudiante = new TokenAdapter(new ArrayList<>());
+        // Inicializa el adaptador con una lista vacía
+        List<UserToken> tokens = new ArrayList<>();
+        tokenAdapterEstudiante = new TokenAdapter(tokens);
         recyclerViewTokensEstudiante.setAdapter(tokenAdapterEstudiante);
 
 
+
+
         // Guarda el rut del estudiante para usarlo al obtener los tokens
-        rutEstudiante = estudiante.getRut();
+        rut = estudiante.getRut();
 
-        // Obtiene y muestra los tokens asociados al estudiante
-        obtenerTokensParaRecyclerView();
+        rutFirebase = estudiante.getRutProfesorAsociado().replace(".", "").replace("-", "");
 
-    }
 
-    private void obtenerTokensParaRecyclerView() {
+        String cleanedRut = rut.replaceAll("[^a-zA-Z0-9]", "_");
+
         // Obtén los tokens asociados al mismo RUT del estudiante
         DatabaseReference tokensRef = FirebaseDatabase.getInstance().getReference("Profesores")
+                .child(rutFirebase)
                 .child("tokens");
 
-        tokensRef.orderByChild("rutAlumno").equalTo(rutEstudiante).addListenerForSingleValueEvent(new ValueEventListener() {
+        Log.d("FIREBASE_PATH", "Ruta de Firebase: " + tokensRef.toString());
+
+        tokenAdapterEstudiante.setOnItemClickListener(new TokenAdapter.OnItemClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onItemClick(UserToken token) {
+                // Aquí puedes abrir la nueva actividad o fragmento específico con los datos del token
+                abrirSeccionEspecifica(token);
+            }
+        });
+        
+        // Escucha cambios en los tokens
+        tokensRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<UserToken> tokens = new ArrayList<>();
+
+                // Itera sobre los tokens y agrega los que coinciden con el rut del estudiante
                 for (DataSnapshot tokenSnapshot : dataSnapshot.getChildren()) {
                     UserToken token = tokenSnapshot.getValue(UserToken.class);
-                    if (token != null) {
+                    if (token != null && token.getRutAlumno().equals(rut)) {
                         tokens.add(token);
                     }
                 }
@@ -83,5 +108,11 @@ public class MainInicioEs extends AppCompatActivity {
                 // (puedes mostrar un Toast o manejarlo de otra manera)
             }
         });
+    }
+
+    private void abrirSeccionEspecifica(UserToken token) {
+        Intent intent = new Intent(MainInicioEs.this, MainDetallesToken.class);
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 }

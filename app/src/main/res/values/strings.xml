@@ -76,6 +76,16 @@
     <string name="buttonAgregarNuevoToken"></string>
     <string name="editTextCodigoToken"></string>
 
+
+
+    <string name="fecha_token"></string>
+    <string name="nombreprofesor_token"></string>
+    <string name="recompensa"></string>
+    <string name="boton_usar"></string>
+    <string name="boton_perdida"></string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="inicio">Inicio</string>
     <string name="tokens">Tokens</string>

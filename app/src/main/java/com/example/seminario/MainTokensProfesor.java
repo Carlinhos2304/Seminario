@@ -58,8 +58,11 @@ public class MainTokensProfesor extends AppCompatActivity {
 
             // Obtener solo los tokens asociados al profesor específico
             DatabaseReference tokensRef = FirebaseDatabase.getInstance().getReference("Profesores")
+                    .child(rutFirebase)
                     .child("tokens");
-            tokensRef.child(rutFirebase).child("tokens").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            tokensRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

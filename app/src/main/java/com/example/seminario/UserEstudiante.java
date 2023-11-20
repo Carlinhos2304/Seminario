@@ -13,12 +13,13 @@ public class UserEstudiante implements Parcelable {
     private String spinner_semestre_es;
     private String spinner_jornada;
     private String spinner_sede;
+    private String rutProfesorAsociado;
 
 
     // Constructor vacío requerido para Firebase
     public UserEstudiante() {}
 
-    public UserEstudiante(String nombre_Apellido, String rut, String email, String pin, String tipoUsuario, String spinner_carrera, String spinner_semestre_es, String spinner_jornada, String spinner_sede) {
+    public UserEstudiante(String nombre_Apellido, String rut, String email, String pin, String tipoUsuario, String spinner_carrera, String spinner_semestre_es, String spinner_jornada, String spinner_sede, String rutProfesorAsociado) {
         this.nombre_Apellido = nombre_Apellido;
         this.rut = rut;
         this.email = email;
@@ -28,6 +29,7 @@ public class UserEstudiante implements Parcelable {
         this.spinner_semestre_es = spinner_semestre_es;
         this.spinner_jornada = spinner_jornada;
         this.spinner_sede = spinner_sede;
+        this.rutProfesorAsociado = rutProfesorAsociado;
     }
 
     // Agrega los métodos getter y setter para acceder a los campos
@@ -46,6 +48,14 @@ public class UserEstudiante implements Parcelable {
 
     public void setRut(String rut) {
         this.rut = rut;
+    }
+
+    public String getRutProfesorAsociado() {
+        return rutProfesorAsociado;
+    }
+
+    public void setRutProfesorAsociado(String rutProfesorAsociado) {
+        this.rutProfesorAsociado = rutProfesorAsociado;
     }
 
     public String getEmail() {
@@ -115,6 +125,7 @@ public class UserEstudiante implements Parcelable {
         spinner_semestre_es = in.readString();
         spinner_jornada = in.readString();
         spinner_sede = in.readString();
+        rutProfesorAsociado = in.readString();
     }
 
     public static final Creator<UserEstudiante> CREATOR = new Creator<UserEstudiante>() {
@@ -145,5 +156,6 @@ public class UserEstudiante implements Parcelable {
         dest.writeString(spinner_semestre_es);
         dest.writeString(spinner_jornada);
         dest.writeString(spinner_sede);
+        dest.writeString(rutProfesorAsociado);
     }
 }
