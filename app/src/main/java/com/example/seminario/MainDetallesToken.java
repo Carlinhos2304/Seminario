@@ -62,8 +62,11 @@ public class MainDetallesToken extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(MainDetallesToken.this, "Token canjeado correctamente", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainDetallesToken.this, MainInicioEs.class);
-                            startActivity(intent);
+
+                            // Cierra la actividad actual
+                            finish();
+
+                            Toast.makeText(MainDetallesToken.this, "Por favor devolver Token presencialmente.", Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(MainDetallesToken.this, "Token no se pudo usar", Toast.LENGTH_SHORT).show();
