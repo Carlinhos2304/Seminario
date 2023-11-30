@@ -6,11 +6,21 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+/**
+ * Actividad que muestra un token asignado correctamente y luego cambia a la sección principal del profesor.
+ */
 public class MainAsignadoCorrectamente extends AppCompatActivity {
+    /**
+     * Método llamado cuando se crea esta actividad.
+     *
+     * @param savedInstanceState La instancia previamente guardada si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.token_asignado_correctamente);
+
         // Define la duración del retraso en milisegundos (por ejemplo, 3000 ms = 3 segundos)
         int delayMillis = 5000;
 
@@ -19,6 +29,9 @@ public class MainAsignadoCorrectamente extends AppCompatActivity {
 
         // Programa una tarea con retraso
         handler.postDelayed(new Runnable() {
+            /**
+             * Ejecuta la lógica específica después del tiempo de retraso especificado.
+             */
             @Override
             public void run() {
                 // Esta parte del código se ejecutará después del tiempo especificado

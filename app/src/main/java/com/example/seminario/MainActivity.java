@@ -21,14 +21,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+/**
+ * Clase principal que maneja la lógica de inicio de sesión de la aplicación.
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private EditText login_rut;
-    private EditText login_pin;
-    private Button boton_login;
-    private Spinner spinner_usuario;
-    private DatabaseReference mDatabase;
+    private EditText login_rut; //Campo para ingresar el RUT
+    private EditText login_pin; // Campo para ingresar el PIN
+    private Button boton_login; // Botón de inicio de sesión
+    private Spinner spinner_usuario; // Selector de tipo de usuario
+    private DatabaseReference mDatabase; // Referencia a la base de datos
 
+    /**
+     * Método llamado cuando se crea esta actividad.
+     *
+     * @param savedInstanceState La instancia previamente guardada si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
         spinner_usuario = findViewById(R.id.spinner_usuario);
         TextView Noregistrado = findViewById(R.id.Noregistrado);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        // Initialize Firebase Auth
 
-
+        // Inicialización del spinner con los tipos de usuario
         String[] datos = new String[]{"Estudiante", "Docente"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, datos);
         spinner_usuario.setAdapter(adapter);
+
+        // Acción al hacer clic en el texto de usuario no registrado
         Noregistrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,23 +65,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Acción al hacer clic en el botón de inicio de sesión
         boton_login.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Método onClick asociado al botón de inicio de sesión.
+             * Verifica las credenciales ingresadas por el usuario y realiza la autenticación.
+             * Muestra mensajes de error o inicia la actividad correspondiente según las credenciales.
+             *
+             * @param v Vista correspondiente al botón presionado.
+             */
             @Override
             public void onClick(View v) {
+
+                // Obtiene el RUT y el PIN ingresados por el usuario
                 String rut = login_rut.getText().toString();
                 String pin = login_pin.getText().toString();
 
                 if (!TextUtils.isEmpty(rut) && !TextUtils.isEmpty(pin)) {
+
+                    // Obtiene el tipo de usuario seleccionado
                     String selectedUsuario = spinner_usuario.getSelectedItem().toString();
                     String dbCollection = (selectedUsuario.equals("Estudiante")) ? "Estudiantes" : "Profesores";
 
+                    // Consulta a la base de datos para verificar las credenciales del usuario
                     mDatabase.child(dbCollection).orderByChild("rut").equalTo(rut).addListenerForSingleValueEvent(new ValueEventListener() {
+                        /**
+                         * Escucha los cambios en los datos obtenidos de la base de datos.
+                         *
+                         * @param dataSnapshot Los datos obtenidos de la base de datos.
+                         */
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                // Usuario encontrado en la colección
+                                // Verifica las credenciales para el usuario encontrado en la colección
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                     if (selectedUsuario.equals("Estudiante")) {
+                                        // Comprueba las credenciales para estudiantes
                                         UserEstudiante userEstudiante = userSnapshot.getValue(UserEstudiante.class);
                                         if (userEstudiante != null && userEstudiante.getPin().equals(pin)) {
                                             // Credenciales correctas para estudiante
@@ -79,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
 
                                             // Envía los datos del estudiante al MainInicioEs
                                             intent.putExtra("estudiante", userEstudiante);
-
                                             startActivity(intent);
                                         } else {
                                             // PIN incorrecto para estudiante
                                             Toast.makeText(MainActivity.this, "PIN incorrecto", Toast.LENGTH_SHORT).show();
                                         }
                                     } else if (selectedUsuario.equals("Docente")) {
+                                        // Comprueba las credenciales para profesores
                                         UserProfesor userProfesor = userSnapshot.getValue(UserProfesor.class);
                                         if (userProfesor != null && userProfesor.getPin().equals(pin)) {
 
@@ -96,17 +126,21 @@ public class MainActivity extends AppCompatActivity {
                                             Intent intent = new Intent(MainActivity.this, MainSeccionProfesor.class);
                                             startActivity(intent);
                                         } else {
-                                            // PIN incorrecto para profesor
+                                            //Muestra mensaje de PIN incorrecto para profesor
                                             Toast.makeText(MainActivity.this, "PIN incorrecto", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
                             } else {
-                                // Usuario no encontrado en la colección
+                                //Muestra un mensaje de Usuario no encontrado en la colección
                                 Toast.makeText(MainActivity.this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                             }
                         }
-
+                        /**
+                         * Maneja la cancelación de la solicitud de datos de la base de datos.
+                         *
+                         * @param databaseError El error relacionado con la solicitud de datos.
+                         */
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             // Manejar errores de base de datos si es necesario

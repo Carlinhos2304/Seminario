@@ -34,6 +34,7 @@ public class MainDetallesToken extends AppCompatActivity {
         TextView recompensa = findViewById(R.id.recompensa);
         TextView fecha = findViewById(R.id.fecha_token);
         Button boton = findViewById(R.id.boton_usar);
+        Button botonperdida = findViewById(R.id.boton_perdida);
 
 
 
@@ -43,6 +44,13 @@ public class MainDetallesToken extends AppCompatActivity {
         nombreProfesor.setText(token.getNombreProfesor());
         recompensa.setText(token.getRecompensa());
         fecha.setText(token.getPlazoEntrega());
+
+        botonperdida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override

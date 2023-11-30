@@ -3,13 +3,18 @@ package com.example.seminario;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,10 +35,13 @@ public class MainInicioEs extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio_estudiante);
+
 
 
         // Obtén referencias a los elementos de la interfaz
@@ -108,7 +116,11 @@ public class MainInicioEs extends AppCompatActivity {
                 // (puedes mostrar un Toast o manejarlo de otra manera)
             }
         });
+
+
     }
+
+
 
     private void abrirSeccionEspecifica(UserToken token) {
         Intent intent = new Intent(MainInicioEs.this, MainDetallesToken.class);
@@ -117,4 +129,6 @@ public class MainInicioEs extends AppCompatActivity {
         intent.putExtra("token", token);
         startActivity(intent);
     }
+
+
 }
