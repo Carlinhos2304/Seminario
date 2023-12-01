@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Acción al hacer clic en el texto de usuario no registrado
         Noregistrado.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Clase para manejar el evento de clic en el botón "No registrado".
+             */
             @Override
             public void onClick(View v) {
                 // Crea un Intent para iniciar la nueva actividad con el diseño "layout_other"

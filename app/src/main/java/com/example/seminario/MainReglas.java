@@ -22,6 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que gestiona la asignación de tokens a estudiantes por parte de un profesor.
+ * Esta clase permite a un profesor asignar tokens a un estudiante específico, definiendo una recompensa y un plazo de entrega.
+ */
 public class MainReglas extends AppCompatActivity {
 
     private Spinner spinnerTokens;
@@ -33,6 +37,10 @@ public class MainReglas extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private String rutFirebase;
 
+    /**
+     * Método invocado al crear la actividad. Inicializa los elementos de la interfaz y gestiona la asignación de tokens.
+     * @param savedInstanceState Objeto Bundle que contiene el estado anterior de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +72,15 @@ public class MainReglas extends AppCompatActivity {
         obtenerTokens(rutFirebase);
 
 
-
+        /**
+         * Maneja el evento de clic en el botón "Agregar", redirigiendo a la actividad MainTokensProfesor.
+         */
         Agregar.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Método invocado al hacer clic en el botón "Agregar".
+             * Inicia una nueva actividad MainTokensProfesor para agregar tokens al profesor.
+             * @param view La vista que ha sido clickeada (en este caso, el botón "Agregar").
+             */
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(MainReglas.this, MainTokensProfesor.class);
@@ -73,9 +88,16 @@ public class MainReglas extends AppCompatActivity {
             }
         });
 
-
-
+        /**
+         * Maneja el evento de clic en el botón "botonAsignar".
+         * Este evento realiza la asignación de un token al estudiante y redirige a la actividad MainAsignadoCorrectamente.
+         */
         botonAsignar.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Método invocado al hacer clic en el botón "botonAsignar".
+             * Asigna un token al estudiante y posteriormente inicia la actividad MainAsignadoCorrectamente.
+             * @param view La vista que ha sido clickeada (en este caso, el botón "botonAsignar").
+             */
             @Override
             public void onClick(View view) {
                 asignarToken(estudiante);
@@ -85,7 +107,10 @@ public class MainReglas extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Método que obtiene los tokens asociados al profesor actual y los muestra en un Spinner.
+     * @param rutFirebase RUT del profesor actual utilizado para recuperar los tokens de la base de datos.
+     */
     private void obtenerTokens(String rutFirebase) {
 
         // Obtener los tokens asociados al mismo RUT del profesor
@@ -93,7 +118,17 @@ public class MainReglas extends AppCompatActivity {
                 .child(rutFirebase)
                 .child("tokens");
 
+        /**
+         * Escucha los cambios de un solo evento en la referencia de Firebase "tokensRef" a través de un ValueEventListener.
+         * Obtiene los códigos de los tokens asociados al profesor con el mismo rutProfesor.
+         * @param dataSnapshot Snapshot de datos obtenido desde Firebase, contiene los datos actuales en la ubicación especificada.
+         */
         tokensRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * Método invocado cuando se detecta un cambio en los datos en la referencia de Firebase "tokensRef".
+             * Itera sobre los datos para obtener los códigos de los tokens asociados al mismo rutProfesor.
+             * @param dataSnapshot Snapshot de datos actualizados.
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> tokenCodes = new ArrayList<>();
@@ -111,6 +146,10 @@ public class MainReglas extends AppCompatActivity {
                 spinnerTokens.setAdapter(adapter);
             }
 
+            /**
+             * Método invocado si la operación de lectura es cancelada o falla.
+             * @param databaseError Objeto que contiene detalles sobre el error de la base de datos.
+             */
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Manejar el error si es necesario
@@ -118,6 +157,11 @@ public class MainReglas extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Método que asigna un token seleccionado a un estudiante con una recompensa y plazo de entrega.
+     * @param estudiante Objeto UserEstudiante que representa al estudiante al que se le asignará el token.
+     */
     private void asignarToken(UserEstudiante estudiante) {
         // Obtén el código del token seleccionado del Spinner
         String codigoToken = spinnerTokens.getSelectedItem().toString();
@@ -153,8 +197,19 @@ public class MainReglas extends AppCompatActivity {
         Toast.makeText(MainReglas.this, "Token asignado correctamente", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Método que elimina un token del Spinner después de ser asignado a un estudiante.
+     * @param codigoToken Código del token que se eliminará del Spinner.
+     */
     private void eliminarTokenDelSpinner(String codigoToken) {
+        /**
+         * Ejecuta una operación en el hilo principal de la interfaz de usuario para eliminar un código de token del adaptador del Spinner.
+         * @param runnable Runnable que contiene la lógica para eliminar el código del token del adaptador del Spinner.
+         */
         runOnUiThread(new Runnable() {
+            /**
+             * Método que se ejecuta en el hilo principal de la interfaz de usuario para realizar operaciones relacionadas con la interfaz.
+             */
             @Override
             public void run() {
                 // Remueve el código del token del adaptador del Spinner

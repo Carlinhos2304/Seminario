@@ -14,11 +14,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad que muestra la lista de estudiantes asociados a un profesor.
+ * Muestra los estudiantes en un RecyclerView y permite ver detalles de cada uno de ellos.
+ */
 public class MainSeccionProfesor extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private EstudianteAdapter adapter;
 
+    /**
+     * Método que se llama cuando la actividad se está iniciando.
+     * Se encarga de configurar la interfaz de usuario y obtener los datos de los estudiantes de la base de datos.
+     * @param savedInstanceState Objeto Bundle que proporciona datos sobre el estado previamente guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +48,11 @@ public class MainSeccionProfesor extends AppCompatActivity {
 
         adapter = new EstudianteAdapter(estudiantes);
 
-        // Configura el escuchador de clic en el adaptador
+        /**
+         * Configura el listener para manejar los clics en el adaptador de estudiantes.
+         * Al hacer clic en un elemento del adaptador, se invoca este listener para abrir una actividad o fragmento con los detalles del estudiante seleccionado.
+         * Utiliza el método 'abrirSeccionEspecifica(estudiante)' para mostrar información detallada sobre el estudiante.
+         */
         adapter.setOnItemClickListener(new EstudianteAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(UserEstudiante estudiante) {
@@ -51,7 +64,14 @@ public class MainSeccionProfesor extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        // Agrega un escuchador de datos
+
+        /**
+         * Agrega un escuchador de datos a la referencia de la base de datos.
+         * Este escuchador detecta cambios en los datos asociados a la referencia.
+         * Al recibir datos nuevos o actualizados, limpia la lista de estudiantes y agrega los datos actualizados obtenidos de la base de datos.
+         * Luego, notifica al adaptador que los datos han cambiado para que se refresque la vista.
+         * Maneja los errores de cancelación del escuchador en el método 'onCancelled'.
+         */
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,6 +94,10 @@ public class MainSeccionProfesor extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método para abrir una actividad que muestra detalles específicos de un estudiante seleccionado.
+     * @param estudiante Objeto UserEstudiante que contiene los detalles del estudiante seleccionado.
+     */
     private void abrirSeccionEspecifica(UserEstudiante estudiante) {
         Intent intent = new Intent(MainSeccionProfesor.this, MainDetallesAlumno.class);
         intent.putExtra("estudiante", estudiante);

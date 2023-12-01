@@ -8,9 +8,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Actividad que muestra los detalles de un estudiante.
+ */
 public class MainDetallesAlumno extends AppCompatActivity {
 
     private Button boton_asignarToken;
+
+    /**
+     * Método llamado cuando se crea esta actividad.
+     *
+     * @param savedInstanceState La instancia previamente guardada si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +32,11 @@ public class MainDetallesAlumno extends AppCompatActivity {
         mostrarDetalles(estudiante);}
 
 
+    /**
+     * Muestra los detalles del estudiante en los elementos de la interfaz de usuario.
+     *
+     * @param estudiante El estudiante cuyos detalles se mostrarán.
+     */
     private void mostrarDetalles(UserEstudiante estudiante) {
         // Accede a los elementos de la interfaz de usuario (TextViews, etc.) y establece los datos del estudiante
         TextView textViewNombre = findViewById(R.id.textViewNombre);
@@ -42,6 +56,9 @@ public class MainDetallesAlumno extends AppCompatActivity {
         textViewSede.setText(estudiante.getSpinner_sede());
         // Establece otros datos según sea necesario
 
+        /**
+         * Establece un listener para el botón "Asignar Token" en la actividad de detalles del estudiante.
+         */
         boton_asignarToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

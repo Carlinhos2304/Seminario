@@ -19,6 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Clase que maneja el registro de usuarios en la aplicación.
+ * Esta actividad permite a los usuarios registrarse como estudiantes o docentes,
+ * validando la información ingresada antes de proceder al registro.
+ */
 public class MainRegister extends AppCompatActivity {
 
     private Spinner tipo_usuario;
@@ -34,7 +39,11 @@ public class MainRegister extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
-
+    /**
+     * Método llamado al crear la actividad.
+     *
+     * @param savedInstanceState Objeto Bundle que contiene el estado previamente guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +66,11 @@ public class MainRegister extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, datos);
         tipo_usuario.setAdapter(adapter);
 
+        /**
+         * Establece un Listener para el botón "Yaregistrado".
+         * Al hacer clic en el botón, inicia una nueva actividad, llevando al usuario de la actividad actual (`MainRegister`)
+         * a `MainActivity`.
+         */
         Yaregistrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +80,14 @@ public class MainRegister extends AppCompatActivity {
             }
         });
 
+        /**
+         * Establece un Listener para el botón "boton_siguiente".
+         * Al hacer clic en el botón, verifica los campos ingresados por el usuario, realiza validaciones y
+         * navega a otra actividad en función de la selección del tipo de usuario (Estudiante o Docente).
+         * Muestra mensajes de error si algún campo está vacío o no cumple con los formatos requeridos.
+         * Si los campos son válidos, inicia una nueva actividad según la selección del tipo de usuario,
+         * pasando los datos del registro como parámetros extras en el Intent.
+         */
         boton_siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +133,13 @@ public class MainRegister extends AppCompatActivity {
 
             }
         });
+
+        /**
+         * Establece un Listener para detectar la selección de un elemento en el Spinner "tipo_usuario".
+         * Si se selecciona un elemento, obtiene el valor seleccionado y puede realizar acciones
+         * basadas en esa selección, como enviar este valor a Firebase u otras operaciones.
+         * Si no se selecciona nada, se maneja la situación donde no se realiza ninguna selección.
+         */
         tipo_usuario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -129,14 +158,25 @@ public class MainRegister extends AppCompatActivity {
 
     }
 
-    // Función para validar el formato del Rut
+    /**
+     * Verifica si el formato del RUT ingresado es válido.
+     *
+     * @param rut El RUT a ser validado.
+     * @return true si el RUT tiene el formato correcto, de lo contrario false.
+     */
     private boolean isValidRut(String rut) {
         String rutRegex = "^(\\d{1,3}(\\.\\d{3}){2}-[0-9kK])?$";
         Pattern pattern = Pattern.compile(rutRegex);
         Matcher matcher = pattern.matcher(rut);
         return matcher.matches();
     }
-    // Función para validar el formato del Correo
+
+    /**
+     * Verifica si el formato del correo electrónico ingresado es válido.
+     *
+     * @param email El correo electrónico a ser validado.
+     * @return true si el correo tiene el formato correcto, de lo contrario false.
+     */
     private boolean isValidEmail(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }

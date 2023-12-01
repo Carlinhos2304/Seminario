@@ -14,12 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Actividad que permite a un profesor agregar un nuevo token a su lista de tokens.
+ * Los profesores pueden agregar tokens nuevos proporcionando un código de token válido.
+ */
 public class MainEditarNuevoToken extends AppCompatActivity {
 
     private Button agregar;
     private EditText editTextCodigoToken; // Agrega esta línea
 
-
+    /**
+     * Método llamado cuando se crea esta actividad.
+     *
+     * @param savedInstanceState La instancia previamente guardada si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,19 +35,24 @@ public class MainEditarNuevoToken extends AppCompatActivity {
         agregar = findViewById(R.id.buttonAgregarNuevoToken);
         editTextCodigoToken = findViewById(R.id.editTextCodigoToken); // Agrega esta línea
 
-
-
-
+        /**
+         * Establece un Listener para el botón "agregar" que ejecuta la acción de agregar un token
+         * y redirige al profesor a la sección principal de profesor después de agregar el token.
+         */
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                agregarToken();
+                agregarToken();// Agrega un token utilizando el método agregarToken()
                 Intent intent = new Intent(MainEditarNuevoToken.this, MainSeccionProfesor.class);
-                startActivity(intent);
+                startActivity(intent);// Inicia la actividad MainSeccionProfesor
             }
         });
     }
 
+    /**
+     * Agrega un nuevo token a la lista de tokens del profesor si el código es válido y el profesor no es nulo.
+     * Si el código está vacío o el profesor es nulo, muestra un mensaje de error.
+     */
     private void agregarToken() {
         // Obtener el código del token desde el EditText
         String codigo = editTextCodigoToken.getText().toString().trim();

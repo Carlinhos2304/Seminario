@@ -17,6 +17,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Esta clase maneja el registro de un estudiante en la aplicación.
+ * Permite a un estudiante proporcionar información adicional, como su carrera, semestre,
+ * jornada y sede. La información se recopila a través de spinners y botones.
+ * Además, permite al estudiante registrarse en la aplicación, asignándolo a un profesor
+ * asociado con el mismo semestre seleccionado por el estudiante.
+ */
 public class MainRegisterEstudiante extends AppCompatActivity {
 
     private Spinner spinner_carrera;
@@ -27,7 +34,11 @@ public class MainRegisterEstudiante extends AppCompatActivity {
     private Button boton_registrarse_est;
     private DatabaseReference mDatabase;
 
-
+    /**
+     * Método llamado al crear la actividad.
+     *
+     * @param savedInstanceState Objeto Bundle que contiene el estado previamente guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,18 +76,30 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, datos4);
         spinner_jornada.setAdapter(adapter4);
 
-
+        /**
+         * Establece un Listener para el evento de clic en la vista Yaregistrado.
+         * Al hacer clic en este elemento, se crea un Intent para iniciar la actividad MainActivity.
+         * Esta acción lleva al usuario a la actividad principal de la aplicación.
+         */
         Yaregistrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Crea un Intent para iniciar la nueva actividad con el diseño "layout_other"
+                // Crea un Intent para iniciar la nueva actividad con el diseño "MainActivity"
                 Intent intent = new Intent(MainRegisterEstudiante.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
 
-
+        /**
+         * Establece un Listener para el evento de clic en el botón boton_registrarse_est.
+         * Recopila los datos seleccionados en los Spinners y los datos adicionales del Intent
+         * para crear un nuevo registro de estudiante en la base de datos Firebase.
+         * Busca un profesor que coincida con el semestre del estudiante para asociarlo.
+         * Si se encuentra un profesor, se crea y almacena el registro del estudiante
+         * y se inicia la actividad MainActivity.
+         * Si no se encuentra un profesor, se maneja la situación.
+         */
         boton_registrarse_est.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +118,15 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                 Intent intent = new Intent(MainRegisterEstudiante.this, MainActivity.class);
 
                 DatabaseReference profesoresRef = FirebaseDatabase.getInstance().getReference("Profesores");
+
+                /**
+                 * Establece un Listener para el evento de consulta de datos de profesores en Firebase.
+                 * Itera sobre los datos obtenidos y busca un profesor que coincida con el semestre seleccionado.
+                 * Si se encuentra un profesor coincidente, crea un nuevo registro de estudiante
+                 * con los detalles proporcionados y lo almacena en la base de datos.
+                 * Inicia la actividad MainActivity después de almacenar el registro del estudiante.
+                 * El bucle se detiene al encontrar un profesor adecuado.
+                 */
                 profesoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -112,10 +144,13 @@ public class MainRegisterEstudiante extends AppCompatActivity {
                                 return; // Sale del bucle cuando se encuentra un profesor
                             }
                         }
-                        // Manejar el caso cuando no se encuentra un profesor con el semestre seleccionado
-                        // Puedes mostrar un mensaje o manejarlo según tus necesidades
                     }
 
+                    /**
+                     * Maneja un evento de cancelación en la consulta de datos de Firebase.
+                     * Permite realizar acciones en caso de error o cancelación en la consulta de datos,
+                     * como mostrar un mensaje Toast o implementar otra lógica para manejar el error.
+                     */
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Manejar el error si es necesario
