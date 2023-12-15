@@ -45,7 +45,7 @@
         </activity>
         <activity android:name=".MainDetallesToken">
         </activity>
-        <activity android:name=".MainTokenUsado">
+        <activity android:name=".MainTokenPerdido">
         </activity>
 
         <meta-data

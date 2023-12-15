@@ -103,7 +103,7 @@ public class MainRegisterProfesor extends AppCompatActivity {
                     radioGroups.addView(CheckBox1);
 
                     CheckBox CheckBox2 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox2.setText("Resolución de Problemas en Álgebra");
+                    CheckBox2.setText("Resolución de Problemas en Algebra");
                     radioGroups.addView(CheckBox2);
 
                     CheckBox CheckBox3 = new CheckBox(MainRegisterProfesor.this);
@@ -176,7 +176,7 @@ public class MainRegisterProfesor extends AppCompatActivity {
                     radioGroups.addView(CheckBox4);
 
                     CheckBox CheckBox5 = new CheckBox(MainRegisterProfesor.this);
-                    CheckBox5.setText("Desarrollo Ágil");
+                    CheckBox5.setText("Desarrollo Agil");
                     radioGroups.addView(CheckBox5);
 
                     CheckBox CheckBox6 = new CheckBox(MainRegisterProfesor.this);

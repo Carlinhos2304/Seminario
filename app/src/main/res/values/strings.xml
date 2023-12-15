@@ -1,6 +1,6 @@
 <resources>
     <!-- pantalla de registro -->
-    <string name="app_name">RegisterToken</string>
+    <string name="app_name">GeToken</string>
     <string name="register_nombre"></string>
     <string name="register_rut"></string>
     <string name="register_email"></string>
@@ -15,8 +15,7 @@
     <string name="iniciar_sesion">Iniciar sesion</string>
     <string name="rut">Rut</string>
     <string name="correo_electronico">Correo electronico</string>
-    <string-array name="tipo_usuario">
-    </string-array>
+    <string-array name="tipo_usuario"></string-array>
     <string name="MensajeError"></string>
 
     <!-- pantalla de login -->
@@ -42,7 +41,6 @@
     <!-- pantalla de registro estudiante -->
     <string name="nombre_estudiante"></string>
     <string name="correo_estudiante"></string>
-
 
 
     <string name="nombresAlumnos"></string>
@@ -77,14 +75,17 @@
     <string name="editTextCodigoToken"></string>
 
 
-
     <string name="fecha_token"></string>
     <string name="nombreprofesor_token"></string>
     <string name="recompensa"></string>
     <string name="boton_usar"></string>
     <string name="boton_perdida"></string>
 
-
+    <!-- pantalla token perdido -->
+    <string name="fechaperdida"></string>
+    <string name="editTextMensajePerdida"></string>
+    <string name="botonNotificar"></string>
+    <string-array name="spinnerPerdido"></string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="inicio">Inicio</string>
@@ -96,9 +97,9 @@
     <string name="boton1">Ver Mas</string>
 
 
-
     <string name="recyclerViewTokensEstudiante"></string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

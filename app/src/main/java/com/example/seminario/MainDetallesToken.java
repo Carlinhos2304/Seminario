@@ -63,8 +63,16 @@ public class MainDetallesToken extends AppCompatActivity {
         botonperdida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Agrega la lógica para marcar el token como perdido si es necesario
-                // (aquí se puede implementar la funcionalidad correspondiente)
+                // Crear un Intent para dirigirse a MainTokenPerdido
+                Intent intent = new Intent(MainDetallesToken.this, MainTokenPerdido.class);
+
+                // Pasar los datos del estudiante, token y rutFirebase a MainTokenPerdido
+                intent.putExtra("estudiante", estudiante);
+                intent.putExtra("token", token);
+                intent.putExtra("rutFirebase", rutFirebase);
+
+                // Iniciar la actividad MainTokenPerdido
+                startActivity(intent);
             }
         });
 

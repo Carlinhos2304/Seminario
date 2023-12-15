@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.seminario.R; // Asegúrate de tener la referencia correcta a tu proyecto
-
 import java.util.List;
 
 /**
