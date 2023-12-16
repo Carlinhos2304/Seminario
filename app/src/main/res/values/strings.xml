@@ -80,6 +80,7 @@
     <string name="recompensa"></string>
     <string name="boton_usar"></string>
     <string name="boton_perdida"></string>
+    <string name="QR"></string>
 
     <!-- pantalla token perdido -->
     <string name="fechaperdida"></string>

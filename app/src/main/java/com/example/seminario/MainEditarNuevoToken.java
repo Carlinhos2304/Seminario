@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 /**
  * Actividad que permite a un profesor agregar un nuevo token a su lista de tokens.
@@ -21,7 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainEditarNuevoToken extends AppCompatActivity {
 
     private Button agregar;
+    private Button QR;
     private EditText editTextCodigoToken; // Agrega esta línea
+    private static final int REQUEST_CODE_SCAN = 123; // Código de solicitud para el escaneo de QR
+
 
     /**
      * Método llamado cuando se crea esta actividad.
@@ -33,6 +39,7 @@ public class MainEditarNuevoToken extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editar_token);
         agregar = findViewById(R.id.buttonAgregarNuevoToken);
+        QR = findViewById(R.id.QR);
         editTextCodigoToken = findViewById(R.id.editTextCodigoToken); // Agrega esta línea
 
         /**
@@ -47,6 +54,43 @@ public class MainEditarNuevoToken extends AppCompatActivity {
                 startActivity(intent);// Inicia la actividad MainSeccionProfesor
             }
         });
+
+        QR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Llama al método para iniciar el escaneo del código QR
+                escanearCodigoQR();
+            }
+        });
+    }
+
+    private void escanearCodigoQR() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Escanea un código QR"); // Mensaje en la pantalla de escaneo
+        integrator.setBeepEnabled(true); // Activar sonido al escanear
+        integrator.setOrientationLocked(false); // Permitir rotar la pantalla al escanear
+        integrator.setRequestCode(REQUEST_CODE_SCAN); // Establecer el código de solicitud para obtener el resultado del escaneo
+        integrator.initiateScan(); // Iniciar el escaneo
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Comprobar si el resultado proviene del escaneo de QR y si fue exitoso
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            if (result != null) {
+                // Obtener el texto del código QR escaneado
+                String scannedCode = result.getContents();
+                if (scannedCode != null && !scannedCode.isEmpty()) {
+                    // Colocar el código escaneado en el EditText
+                    editTextCodigoToken.setText(scannedCode);
+                } else {
+                    // Mensaje si no se pudo obtener el código escaneado
+                    Toast.makeText(this, "No se pudo escanear el código QR", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     /**

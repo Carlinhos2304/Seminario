@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.213" >
+            app:layout_constraintVertical_bias="0.213">
 
             <EditText
                 android:id="@+id/editTextCodigoToken"
@@ -91,35 +91,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.417" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
-            android:layout_width="65dp"
-            android:layout_height="56dp"
-            android:background="@drawable/boton_redondo"
-            android:elevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.562">
-
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/qr_code" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <Button
             android:id="@+id/buttonAgregarNuevoToken"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginBottom="68dp"
             android:backgroundTint="#DCDCDC"
             android:text="Agregar"
             android:textColor="#000000"
@@ -127,8 +103,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/QR"
+            app:layout_constraintVertical_bias="0.85" />
+
+        <Button
+            android:id="@+id/QR"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="21dp"
+            android:backgroundTint="#DCDCDC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+        <ImageView
+            android:id="@+id/R"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            app:layout_constraintBottom_toBottomOf="@+id/QR"
+            app:layout_constraintEnd_toEndOf="@+id/QR"
+            app:layout_constraintStart_toStartOf="@+id/QR"
+            app:layout_constraintTop_toTopOf="@+id/QR"
+            app:srcCompat="@drawable/qr_code" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
